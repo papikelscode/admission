@@ -1,0 +1,85 @@
+body {font-family: "Lato", sans-serif;
+background-color: cadetblue;
+width: 100%;
+overflow-x:hidden;
+overflow-y: hidden;
+}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: black;
+ 
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: whitesmoke;
+  display: block;
+  margin-bottom: 20%;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;background-color: cadetblue;
+  height: 15rem;
+  
+
+}
+.main h1{
+  font-size: 40px;
+  font-weight: 900;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+}
+.part1{
+  margin-top: 10%;
+  margin-left: 10%;
+  width: 100%;
+  
+}
+.part1 h1{
+  font-size: 25px;
+  color: whitesmoke;
+}
+.star{
+  color: red;
+}
+input{
+  width: 30%;
+  height: 4rem;
+}
+button{
+  width: 10%;
+  height: 3rem;
+  margin-top: 2%;
+  font-size: 20px;
+}
+.part2{
+
+  height: 25rem;
+  background-color: white;
+  margin-top: 10%;
+  width: 30%;
+  margin-left: 60%;
+  text-align: center;
+}
+h3{
+  margin-bottom:8%;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
