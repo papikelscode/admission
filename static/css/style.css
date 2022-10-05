@@ -81,9 +81,11 @@ nav ul li ul li a {
   }
   nav ul {
     display: none;
+    width: 100%;
   }
   nav ul li {
     float: none;
+    width: 100%;
   }
   nav ul li a {
     padding: 15px;
@@ -91,16 +93,112 @@ nav ul li ul li a {
   }
   nav ul li ul li a {
     padding-left: 30px;
+    width: 100%;
   }
   .nav-dropdown {
     position: static;
+  }
+  #firstnames label{
+    margin-left: 15%;
+  }
+  #firstname{
+    margin-left: 15%;
+    width: 85%;
   }
 }
 @media screen and (min-width: 799px) {
   .nav-list {
     display: block !important;
   }
+  .firstnames{
+    margin-left: 50%;
+  }
+  #firstnames{
+    margin-left: 50%;
+  }
+  #firstname{
+    margin-left: 25%;
+  }
+ 
+
 }
+#nav-toggle {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+}
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 5px;
+  width: 35px;
+  background: #ffffff;
+  position: absolute;
+  display: block;
+  content: '';
+  transition: all 300ms ease-in-out;
+}
+#nav-toggle span:before {
+  top: -10px;
+}
+#nav-toggle span:after {
+  bottom: -10px;
+}
+#nav-toggle.active span {
+  background-color: transparent;
+}
+#nav-toggle.active span:before, #nav-toggle.active span:after {
+  top: 0;
+}
+#nav-toggle.active span:before {
+  transform: rotate(45deg);
+}
+#nav-toggle.active span:after {
+  transform: rotate(-45deg);
+}
+.nav-logo{
+  height: 4rem;
+  width: 20%;
+  border-radius: 50px;
+}
+.nav-logo img{
+  width: 100%;
+  height:4rem;
+  border-radius: 50px;
+  margin-top: 2%;
+}
+input{
+  width: 50%;
+  height: 5rem;
+  border: 5px solid black;
+}
+#firstnames{
+  margin-left: -17%;
+}
+.firstnames{
+  margin-left: -17%;
+}
+#btn{
+  width: 50%;
+  font-size: 19px;
+}
+
+/* @media screen and (min-width: 799px) {
+  .nav-list {
+    display: block !important;
+  }
+ 
+  #btn{
+    width: 50%;
+  }
+}
+@media screen and (max-width: 640px){
+#btn{
+  width: 100%;
+}
+} */
 #nav-toggle {
   position: absolute;
   left: 18px;
@@ -141,12 +239,36 @@ input{
     height:3rem;
 }
 .noti{
-  width: 50%;
+  width: 100%;
   height: 3rem;
   background-color: red;
-  color: white;
+  color: whitesmoke;
   text-align: center;
+}
+#alertmsg{
+  font-size: 25px;
+  color: black;
 }
 .delete{
   background-color: blue;
+}
+@media screen and (min-width: 640px) {
+  .nav{
+    width: 120%;
+  }
+  .nav-list a{
+    width: 100%;
+    border-radius: none;
+    height: 4rem;
+  }
+  .firstnames{
+    margin-left: 50%;
+  }
+  #firstnames{
+    margin-left: 50%;
+  }
+  #firstname{
+    margin-left: 25%;
+  }
+  
 }

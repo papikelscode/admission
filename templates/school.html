@@ -7,29 +7,26 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/css/dashboard.css">
+   
 </head>
 <body>
     <div class="sidebar">
-        <a href="">Logo</a>
-        <a href="./dashboard.html"> Result</a>
+        
+            <a class="nav-logo" href="#!"><img src="../static/img/NOU-Pro.png" alt=""></a>
+        
+        <a href="./dashboard"> Result</a>
         <a href="./school.html"><i class="fa-thin fa-school"></i> School</a>
-        <a href="#clients"> Profile</a>
         <a href="#contact"><i class="fa-regular fa-arrow-up-left-from-circle"></i> Logout</a>
     </div>
 
 
 
     <div class="main">
-        <h1>School Checker </h1>
-    <div class="part1">
-        <h1>Put in your exam number <span class="star">**</span>  </h1>
-        <input type="number" name="" id="">
-<br>
-        <button>submit</button>
+      
     </div>
       </div>
       <div class="part2">
-        <h3>Your Total score</h3>
+        <h3> <span>**</span> Here are the Schools that offered you Admission <span>**</span> </h3>
         <h2 id="text1">  {{current_user.school_one}}</h2>
         <h2 id="text1">  {{current_user.school_two}}</h2>
         <h2 id="text1">  {{current_user.school_three}}</h2>

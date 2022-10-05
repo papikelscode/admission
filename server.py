@@ -1,7 +1,7 @@
 
 import re
-from flask import Flask, render_template, request, redirect, url_for,jsonify,abort
-# from flask.json import jsonify
+from flask import Flask, render_template, request, redirect, url_for,jsonify
+#from flask.json import jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 from werkzeug.security  import generate_password_hash, check_password_hash
@@ -39,7 +39,7 @@ db = SQLAlchemy(app)
 
 class Users(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    Firstname = db.Column(db.String(255))
+    firstname = db.Column(db.String(255))
     lastname = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(500))
@@ -52,7 +52,7 @@ class Users(db.Model,UserMixin):
     school_three=  db.Column(db.String(255))
     school_four =  db.Column(db.String(255))
     exam_no = db.Column(db.Integer)
-    referID = db.Column(db.String(500),unique=True)
+    referID = db.Column(db.String(500))
 
 
 
@@ -119,7 +119,7 @@ def signin():
             if mainUser.check_password(data['password']):
                 login_user(mainUser,remember=True,fresh=True)
                 return jsonify({'status':200,'msg':'user authenticated'})
-            return jsonify({"status":404,"msg":"Inavlid password provided!!!"})
+            return jsonify({"status":404,"msg":"Invalid password provided!!!"})
         return jsonify({"status":404,"msg":"invalid email or username"})
 
     return render_template("signin.html")
@@ -166,12 +166,15 @@ def dashboard():
                                 siteSettings=siteSettings,
                                 )
 
-@app.route('/login.html')
-def login():
-    return render_template('login.html')
+# @app.route('/login.html')
+# def login():
+#     return render_template('login.html')
 @app.route('/school.html')
 def schools():
     return render_template('school.html')
+@app.route('/email.html')
+def email():
+    return render_template('email.html')
 
 
 
