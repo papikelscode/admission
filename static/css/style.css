@@ -174,11 +174,14 @@ input{
   height: 5rem;
   border: 5px solid black;
 }
-#firstnames{
-  margin-left: -17%;
+
+
+#firstnames input{
+  margin-left: -170%;
+  width: 200%;
 }
-.firstnames{
-  margin-left: -17%;
+#firstnames label{
+  margin-left: -170%;
 }
 #btn{
   width: 50%;
@@ -252,7 +255,7 @@ input{
 .delete{
   background-color: blue;
 }
-@media screen and (min-width: 640px) {
+@media screen and (max-width: 640px) {
   .nav{
     width: 120%;
   }
@@ -262,13 +265,17 @@ input{
     height: 4rem;
   }
   .firstnames{
-    margin-left: 50%;
+    margin-left: 0;
   }
   #firstnames{
     margin-left: 50%;
   }
-  #firstname{
-    margin-left: 25%;
+  #firstnames input{
+   margin-left: -100%;
+   width: 200%;
+  }
+  #firstnames label{
+    margin-left: -100%;
   }
   
 }

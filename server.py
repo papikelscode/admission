@@ -178,6 +178,10 @@ def email():
 
 
 
+@app.route("/nav.html")
+def nav():
+    return render_template('nav.html')
+
 
 
 

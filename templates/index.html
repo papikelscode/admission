@@ -15,34 +15,7 @@
 </head>
 <body>
   
-
-    <section class="navigation">
-        <div class="nav-container">
-          <div class="brand">
-            <a class="nav-logo" href="#!"><img src="../static/img/NOU-Pro.png" alt=""></a>
-          </div>
-          <nav>
-            <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
-            <ul class="nav-list">
-              <li>
-                <a href="./index.html">Home</a>
-              </li>
-              <li>
-                <a href="./service.html">Service</a>
-              </li>
-              
-              <li>
-                <a href="./about.html">About</a>
-              </li>
-              
-              <li>
-                <a href="#!">About Developer</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </section>
-         
+  {% include "nav.html" %}
 
 
 
@@ -128,8 +101,8 @@
                   <p id="alertmsg"></p>
                 </div>
                 <br>
-                <div  id="firstnames" class="col-span-6 sm:col-span-3">
-                  <label
+                <div id="firstnames"  class="col-span-6 sm:col-span-3">
+                  <label  
                     for="FirstName"
                     class="block text-sm font-medium text-gray-700 firstnames"
                    
@@ -138,6 +111,7 @@
                   </label>
       
                   <input
+                
                     type="text"
                     id="firstname"
                     name="first_name"
@@ -259,36 +233,7 @@
 
 
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-
-
-      <script>
-        (function($) { // Begin jQuery
-       $(function() { // DOM ready
-         // If a link has a dropdown, add sub menu toggle.
-         $('nav ul li a:not(:only-child)').click(function(e) {
-           $(this).siblings('.nav-dropdown').toggle();
-           // Close one dropdown when selecting another
-           $('.nav-dropdown').not($(this).siblings()).hide();
-           e.stopPropagation();
-         });
-         // Clicking away from dropdown will remove the dropdown class
-         $('html').click(function() {
-           $('.nav-dropdown').hide();
-         });
-         // Toggle open and close nav styles on click
-         $('#nav-toggle').click(function() {
-           $('nav ul').slideToggle();
-         });
-         // Hamburger to X toggle
-         $('#nav-toggle').on('click', function() {
-           this.classList.toggle('active');
-         });
-       }); // end DOM ready
-     })(jQuery); // end jQuery
-     </script>
-    
+     
      
     
      
