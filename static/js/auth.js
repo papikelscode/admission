@@ -6,6 +6,7 @@ const Signup = async () =>{
         Details.email = document.getElementById("email").value
         Details.lastname = document.getElementById("lastname").value
         Details.password = document.getElementById("password").value
+        Details.exam_no
       
         console.log("details",Details);
         // var spin = document.getElementById("spin")
@@ -50,7 +51,8 @@ const Signup = async () =>{
 
     try { 
         const Details = {}
-        Details.email = document.getElementById("email").value
+        Details.exam_no = document.getElementById("exam_no").value
+        // Details.email = document.getElementById("email").value
         Details.password = document.getElementById("password").value
         // var spin = document.getElementById("spin")
         // arrow.style.display = "none"

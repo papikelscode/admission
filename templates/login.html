@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body{
+            background-color: blue;
+        }
+        .card{
+            margin-top: 10%;
+            background-color: whitesmoke;
+    border-radius: 0.25rem;
+    max-width: 20%;
+    position: inherit;
+    padding-bottom: 5rem;
+    padding-top: 1rem;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.2), 0 0px 0 1px rgba(10, 10, 10 ,0.02);
+    height: 15rem;
+
+        }
+        input{
+            width: 70%;
+            height: 3rem;
+            margin-bottom: 5%;
+        }
+        h1{
+            color: whitesmoke;
+            font-size: 52px;
+        }
+        @media only screen and (max-width:960px){
+            .card{
+                max-width: 100rem;
+            }
+            input{
+                width: 100%;
+            }
+            center{
+                width: 100%;
+            }
+        }  
+    </style>
+</head>
+<body>
+    <center>
+        <h1>
+            Welcome to Login 
+        </h1>
+        <div class="card">
+            
+    <form action="{{url_for('login')}}" method="POST">
+    <input type="text" name="usernames"> <br>
+    <input type="password" name="passwords" id="">
+    <input type="submit" value="Submit">
+</form>
+<a href="process">register</a>
+</div>
+
+</center>
+</body>
+</html>

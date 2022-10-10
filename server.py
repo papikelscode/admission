@@ -52,7 +52,10 @@ class Users(db.Model,UserMixin):
     school_three=  db.Column(db.String(255))
     school_four =  db.Column(db.String(255))
     exam_no = db.Column(db.Integer)
-    referID = db.Column(db.String(500))
+    username = db.Column(db.String(255))
+    is_admin = db.Column(db.Boolean, default = False)
+
+   
 
 
 
@@ -92,6 +95,8 @@ class Settings(db.Model,UserMixin):
 class Secure(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
+    def not_auth(self):
+        return "not allowed"
     
 
 admin = Admin(app, name='administration', template_mode='bootstrap3')
@@ -106,15 +111,67 @@ def user_loader(homepage_id):
     return Users.query.get(homepage_id)
 
 
+@app.route('/login',methods=['GET','POST'])
+def login():
+    user = Users()
+    if request.method == 'POST':
+        username = request.form['usernames']
+        password = request.form['passwords']
+        user = Users.query.filter_by(username=username,is_admin=True).first()
+       
+        if user:
+            if user.password == password:
+                login_user(user)
+                return redirect('admin')
+
+                
+                
+            
+
+
+    return render_template('login.html')
+@app.route('/process',methods=['GET','POST'])
+
+def process():
+    auths = Users()
+    if request.method == "POST":
+        username = request.form['uname']
+        password = request.form['pass']
+        email = request.form['email']
+        auths = Users(username=username,
+             password=password,email=email,is_admin=True)
+        db.session.add(auths)
+        db.session.commit()
+        return "welcome sign up completed"
+    return render_template('register.html')
+    
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route("/signin",methods=['GET','POST'])
 def signin():
     users = Users()
     if request.method == "POST":
         data = request.json
-        userByemail = users.query.filter_by(email=data['email']).first()
+        userByexam_no = users.query.filter_by(exam_no=data['exam_no']).first()
         mainUser = None
-        if userByemail:
-            mainUser = userByemail
+        if userByexam_no:
+            mainUser = userByexam_no
         if mainUser:
             if mainUser.check_password(data['password']):
                 login_user(mainUser,remember=True,fresh=True)
@@ -140,6 +197,7 @@ def signup():
                             firstname = firstname,
                             lastname = lastname,
                             password = password
+                           
                             )
         users.save()
 
@@ -178,9 +236,9 @@ def email():
 
 
 
-@app.route("/nav.html")
-def nav():
-    return render_template('nav.html')
+@app.route("/msg.html")
+def msg():
+    return render_template('msg.html')
 
 
 
