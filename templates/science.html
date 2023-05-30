@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <h2>Science Student Form</h2>
+    <form class="input-form" action="{{url_for('science')}}" method="POST">
+        <label for="">Put in your Grade for each course</label>
+      <input type="text" placeholder="First Course" class="input-field" name="course_one">
+      <input type="text" placeholder="Second Course" class="input-field" name="course_two">
+      <input type="text" placeholder="Third Course" class="input-field" name="course_three">
+      <input type="text" placeholder="Fourth Course" class="input-field" name="course_four">
+      <input type="text" placeholder="Fifth Course" class="input-field" name="course_five">
+      <input type="text" placeholder="Sixth Course" class="input-field" name="course_six">
+      <label for=""> Preferred School</label>
+      <input type="text" placeholder="first school choice " class="input-field" name="school_one">
+      <input type="text" placeholder="second school choice " class="input-field" name="school_two">
+      <input type="text" placeholder="third school choice " class="input-field" name="school_three">
+      <label for=""> Preferred course</label>
+      <input type="text" placeholder="Preferred course" class="input-field" name="preferred_course">
+
+      <label for=""> Personality test question </label>
+
+      <label class="question">what's your pet's name </label>
+      <input type="text" placeholder="Question one" class="input-field" name="question1">
+
+      <label class="question">what's your mother's name </label>
+      <input type="text" placeholder="Question two" class="input-field" name="question2">
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.page {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+.input-form {
+  margin-top: 20px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.submit-button:active {
+  background-color: #3e8e41;
+}
+
+</style>

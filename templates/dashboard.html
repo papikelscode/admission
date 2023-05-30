@@ -1,42 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.dashboard {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dashboard-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dashboard-button:hover {
+  background-color: #45a049;
+}
+
+.dashboard-button:active {
+  background-color: #3e8e41;
+}
+
+  </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="brand">
-            <a class="nav-logo" href="#!"><img src="../static/img/NOU-Pro.png" alt=""></a>
-          </div>
-        <a href="./dashboard.html"> Result</a>
-        <a href="./school.html">School</a>
-        <a href="/logout"><i class="fa-regular fa-arrow-up-left-from-circle"></i> Logout</a>
+  <div class="dashboard">
+    <h2>Welcome to the Dashboard</h2>
+    <h3>{{current_user.firstname}}</h3>
+    <div class="button-container">
+      <button class="dashboard-button" onclick="navigateToPage()">Grade</button>
+      <button class="dashboard-button"onclick="navigateToPageTwo()">Profile </button>
+      <button class="dashboard-button"onclick="navigateToPageThree()">Admission Result </button>
+
     </div>
-
-
-
-    <div class="main">
-        <!-- <input type="button" value="Check Result"> -->
-        <!-- <h1>Result Checker </h1>
-    <div class="part1">
-        <h1>Put in your exam number <span class="star">**</span>  </h1>
-        <input type="number" name="" id=""> -->
-
-        
-    </div>
-      </div>
-      <div class="part2">
-        <h3>Your Total score</h3>
-        <h2 id="text1">  {{current_user.course_one}}</h2>
-        <h2 id="text1">  {{current_user.course_two}}</h2>
-        <h2 id="text1">  {{current_user.course_three}}</h2>
-        <h2 id="text1">  {{current_user.course_four}}</h2>
-
-      </div>
+  </div>
+  <script>
+     function navigateToPage() {
+    window.location.href = 'science';
+  }
+  function navigateToPageTwo() {
+    window.location.href = 'profile';
+  }
+  function navigateToPageThree() {
+    window.location.href = 'result';
+  }
+  </script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 
+
+
 import re
 from flask import Flask, render_template, request, redirect, url_for,jsonify
 #from flask.json import jsonify
@@ -14,7 +16,7 @@ import os
 #from flask_script import Manager
 #from sys import argv
 
-
+import random
 from random import randint
 from datetime import datetime
 #from flask_marshmallow import Marshmallow
@@ -34,43 +36,33 @@ app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 db = SQLAlchemy(app)
 
 
-
-
-
 class Users(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(255))
     lastname = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique=True)
-    password = db.Column(db.String(500))
-    course_one =  db.Column(db.String(255))
-    course_two =  db.Column(db.String(255))
-    course_three = db.Column(db.String(255))
-    course_four =  db.Column(db.String(255))
-    school_one =  db.Column(db.String(255))
-    school_two =  db.Column(db.String(255))
-    school_three=  db.Column(db.String(255))
-    school_four =  db.Column(db.String(255))
-    exam_no = db.Column(db.Integer)
+    exam_no = db.Column(db.String(255), unique=True)
     username = db.Column(db.String(255))
-    is_admin = db.Column(db.Boolean, default = False)
+    password = db.Column(db.String(255))
+    school = db.Column(db.String(255))
+    prefcourse = db.Column(db.String(255))
+    userFile_science = db.relationship('userFile_science', backref='users', lazy=True)
 
-   
-
-
-
-    def check_password(self, password):
-            return check_password_hash(self.password, password)
-    def set_password(self, password):
-        self.password = generate_password_hash(password, method='sha256')
-
-
-    def create(self, firstname='',  email='', lastname='', password='',referID=''):
-        self.firstname	 = firstname
-        self.email	 = email
-        self.lastname 	 = lastname
-        self.referID = referID
-        self.password= generate_password_hash(password, method='sha256')
+    
+    
+    def create(self, firstname='',  exam_no='', lastname='', username = '', password = '',school='', prefcourse = ''):
+            self.firstname	 = firstname
+            self.lastname 	 = lastname
+            self.exam_no = exam_no
+            self.username = username
+            self.password =  password
+            self.school = school
+            self.prefcourse = prefcourse
+           
+            
+            
+            
+       
+  
 
 
     def save(self):
@@ -80,28 +72,102 @@ class Users(db.Model,UserMixin):
     def commit(self):
         db.session.commit()
 
-class school(db.Model,UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    school_name = db.Column(db.String(255))
-    school_location = db.Column(db.String(255))
-    school_rate = db.Column(db.String(255))
-    
+class userFile_science(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key = True)
+    course_one =  db.Column(db.String(255))
+    course_two =  db.Column(db.String(255))
+    course_three = db.Column(db.String(255))
+    course_four =  db.Column(db.String(255))
+    course_five =  db.Column(db.String(255))
+    course_six =  db.Column(db.String(255))
+    school_one = db.Column(db.String(255))
+    school_two =  db.Column(db.String(255))
+    school_three =  db.Column(db.String(255))
+    preferred_school = db.Column(db.String(255))
+    preferred_course = db.Column(db.String(255))
+    personality_test1 = db.Column(db.String(255))
+    personality_test2 = db.Column(db.String(255))
+    user = db.Column(db.Integer, db.ForeignKey(Users.id))
 
-class Settings(db.Model,UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(255), unique=True)
-    lastname = db.Column(db.String(255), unique=True)
+    
+    def create(self, course_one='',  course_two='', course_three='', course_four = '', course_five = '', course_six = '', school_one = '', school_two = '', school_three = '', preferred_school = '', preferred_course ='', personality_test1='', personality_test2=''):
+            self.course_one	 = course_one
+            self.course_two	 = course_two
+            self.course_three	 = course_three
+            self.course_four	 = course_four
+            self.course_five	 = course_five
+            self.course_six	 = course_six
+            self.school_one = school_one
+            self.school_two = school_two
+            self.school_three = school_three
+            self.preferred_course = preferred_course
+            self.preferred_school = preferred_school
+            self.presonality_test1 = personality_test1
+            self.presonality_test2 = personality_test2
+       
+  
+
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def commit(self):
+        db.session.commit()
+        
+# class userFile_others(db.Model, UserMixin):
+#     id = db.Column(db.Integer, primary_key = True)
+#     course_one =  db.Column(db.String(255))
+#     course_two =  db.Column(db.String(255))
+#     course_three = db.Column(db.String(255))
+#     course_four =  db.Column(db.String(255))
+#     course_five =  db.Column(db.String(255))
+  
+#     school_one = db.Column(db.String(255))
+#     school_two =  db.Column(db.String(255))
+#     school_three =  db.Column(db.String(255))
+#     preferred_school = db.Column(db.String(255))
+#     preferred_course = db.Column(db.String(255))
+#     presonality_test1 = db.Column(db.String(255))
+#     presonality_test2 = db.Column(db.String(255))
+    
+#     def create(self, course_one='',  course_two='', course_three='', course_four = '', course_five = '', school_one = '', school_two = '', school_three = '', preferred_school = '', preferred_course ='', personality_test1='', personality_test2=''):
+#             self.course_one	 = course_one
+#             self.course_two	 = course_two
+#             self.course_three	 = course_three
+#             self.course_four	 = course_four
+#             self.course_five	 = course_five
+            
+#             self.school_one = school_one
+#             self.school_two = school_two
+#             self.school_three = school_three
+#             self.preferred_course = preferred_course
+#             self.preferred_school = preferred_school
+#             self.presonality_test1 = personality_test1
+#             self.presonality_test2 = personality_test2
+       
+  
+
+
+#     def save(self):
+#         db.session.add(self)
+#         db.session.commit()
+
+#     def commit(self):
+#         db.session.commit()
+      
 
 class Secure(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
-    def not_auth(self):
-        return "not allowed"
     
 
 admin = Admin(app, name='administration', template_mode='bootstrap3')
-admin.add_view(Secure(Users, db.session))
-admin.add_view(Secure(Settings, db.session))
+admin.add_view(ModelView(Users, db.session))
+admin.add_view(ModelView(userFile_science, db.session))
+# admin.add_view(ModelView(userFile_others, db.session))
+
+
 
 login_manager = LoginManager()
 login_manager.login_view = "signin"
@@ -142,109 +208,128 @@ def process():
              password=password,email=email,is_admin=True)
         db.session.add(auths)
         db.session.commit()
-        return "welcome sign up completed"
+        return redirect(url_for("dashboard"))
     return render_template('register.html')
-    
-   
+  
 
+  
+@app.route('/',methods=['GET','POST'])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@app.route("/signin",methods=['GET','POST'])
-def signin():
-    users = Users()
-    if request.method == "POST":
-        data = request.json
-        userByexam_no = users.query.filter_by(exam_no=data['exam_no']).first()
-        mainUser = None
-        if userByexam_no:
-            mainUser = userByexam_no
-        if mainUser:
-            if mainUser.check_password(data['password']):
-                login_user(mainUser,remember=True,fresh=True)
-                return jsonify({'status':200,'msg':'user authenticated'})
-            return jsonify({"status":404,"msg":"Invalid password provided!!!"})
-        return jsonify({"status":404,"msg":"invalid email or username"})
-
-    return render_template("signin.html")
-
-
-@app.route("/signup",methods=['GET','POST'])
 def signup():
-    users = Users()
-    if request.method == 'POST':
-        data = request.json
-        email = data['email']
-        firstname = data['firstname']
-        lastname = data['lastname']
-        password = data['password']
-        if users.query.filter_by(email=email).first():
-            return jsonify({"status":404,"msg":"email already exist!!!"})
-        users.create(email=email,
-                            firstname = firstname,
-                            lastname = lastname,
-                            password = password
-                           
-                            )
-        users.save()
-
-        login_user(users)
-        # return redirect(url_for("dashboard"))
-        return jsonify({'status':200,"msg":"registration compelete!!!"})
-
-    return render_template("signup.html")
-@app.route('/')
-def index():
+    auths = Users()
+    if request.method == "POST":
+        firstname = request.form['fname']
+        lastname = request.form['lname']
+        exam_no = request.form['exam_no']
+        
+        auths = Users(firstname=firstname, lastname = lastname
+             ,exam_no=exam_no)
+        db.session.add(auths)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
     return render_template('index.html')
-@app.route('/service.html')
-def service():
-    return render_template('service.html')
-@app.route('/about.html')
-def about():
-    return render_template('about.html')
+
+@app.route('/signin',methods=['GET','POST'])
+def signin():
+    user = Users()
+    if request.method == 'POST':
+        exam_no = request.form['exam_no']
+       
+        user = Users.query.filter_by(exam_no=exam_no).first()
+       
+        login_user(user)
+        return redirect(url_for("dashboard"))
+
+                
+                
+            
+
+
+    return render_template('signin.html')
+
+@app.route('/science',methods=['GET','POST'])
+@login_required
+def science():
+    auth = userFile_science()
+    
+    if request.method == 'POST':
+        course_one = request.form['course_one']
+        course_two = request.form['course_two']
+        course_three = request.form['course_three']
+        course_four = request.form['course_four']
+        course_five = request.form['course_five']
+        course_six = request.form['course_six']
+        school_one = request.form['school_one']
+        school_two = request.form['school_two']
+        school_three = request.form['school_three']
+        # preferred_school = request.form ['prefferred_school']
+        preferred_course = request.form['preferred_course']
+        personality_test1 = request.form['question1']
+        personality_test2 = request.form['question2']
+        
+        
+        auth = userFile_science(course_one = course_one, course_two = course_two, course_three = course_three, course_four = course_four, course_five = course_five, course_six = course_six,school_one= school_one, school_two = school_two, school_three = school_three, preferred_course = preferred_course,  personality_test1 = personality_test1, personality_test2 = personality_test2)
+        db.session.add(auth)
+        db.session.commit()
+        return "go to view result screen"
+        
+            
+    return render_template('science.html')
+
+# @app.route("/others")
+# @login_required
+# def others():
+#     auth = userFile_others()
+#     total =  userFile_science
+#     if request.method == 'POST':
+#         course_one = request.form['course_one']
+#         course_two = request.form['course_two']
+#         course_three = request.form['course_three']
+#         course_four = request.form['course_four']
+#         course_five = request.form['course_five']
+       
+#         school_one = request.form['school_one']
+#         school_two = request.form['school_two']
+#         school_three = request.form['school_three']
+#         preferred_school = request.form ['prefferred_school']
+#         preferred_course = request.form['prefferred_course']
+#         personality_test1 = request.form['question1']
+#         personality_test2 = request.form['question2']
+        
+#         # if total == course_one + course_two + course_three + course_four + course_five + course_five + course_six:
+#         #     print(total)
+#         auth = userFile_science(course_one = course_one, course_two = course_two, course_three = course_three, course_four = course_four, course_five = course_five, school_one= school_one, school_two = school_two, school_three = school_three, preferred_course = preferred_course, preferred_school = preferred_school, personality_test1 = personality_test1, personality_test2 = personality_test2)
+#         db.session.add(auth)
+#         db.session.commit()
+#         return "go to view result screen"
+        
+   
+#     return render_template('others.html')
+
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    siteSettings = Settings.query.all()
-  
-    return render_template('dashboard.html',
-                                siteSettings=siteSettings,
-                                )
-
-# @app.route('/login.html')
-# def login():
-#     return render_template('login.html')
-@app.route('/school.html')
-def schools():
-    return render_template('school.html')
-@app.route('/email.html')
-def email():
-    return render_template('email.html')
+    return render_template('dashboard.html')
 
 
 
-@app.route("/msg.html")
-def msg():
-    return render_template('msg.html')
+@app.route('/result')
+@login_required
+def result():
+    return render_template('result.html')
 
+# @app.route('/entry')
+# @login_required
+# def entry():
+#     siteSettings = userFile_science.query.all()
+#     return render_template('entry.html',
+#                             siteSettings=siteSettings
+#                            )
 
-
-
-
-
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html')
 @app.route("/logout")
 def logout():
     logout_user()
